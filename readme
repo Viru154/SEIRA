@@ -1,0 +1,8 @@
+# 1. Ir a la carpeta del proyecto
+cd ~/Escritorio/10mo\ Semestre/Seminario\ de\ Tecnologias\ de\ Informacion/seira/seira
+
+# 2. Activar entorno virtual
+source venv/bin/activate
+
+# 3. Iniciar servidor Flask
+python backend/app.py

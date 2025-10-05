@@ -1,0 +1,26 @@
+# SEIRA - Dependencias compatibles con Python 3.13
+
+# Core
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# Data processing - Versiones compatibles con Python 3.13
+pandas==2.2.0
+numpy==1.26.0
+
+# NLP - spaCy
+spacy==3.7.2
+
+# NLP - Hugging Face
+transformers==4.36.0
+tokenizers==0.15.0
+
+# Utilities
+python-dotenv==1.0.0
+Faker==22.0.0
+
+# Database
+SQLAlchemy==2.0.25
+
+# Opcional para análisis
+scikit-learn==1.4.0

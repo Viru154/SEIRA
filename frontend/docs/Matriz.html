@@ -1,0 +1,136 @@
+<div style="margin: 20px 0;">
+  <h4 style="color: #2c3e50; margin-bottom: 15px;">Matriz de Probabilidad vs Impacto</h4>
+  <table style="border-collapse: collapse; width: 100%; max-width: 700px; margin: 20px 0;">
+    <thead>
+      <tr>
+        <th style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; text-align: center;">IMPACTO</th>
+        <th style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; text-align: center;">BAJA</th>
+        <th style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; text-align: center;">MEDIA</th>
+        <th style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; text-align: center;">ALTA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; font-weight: bold; text-align: center;">ALTO</td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #f39c12; color: white; text-align: center; font-size: 12px;">
+          <strong>R4</strong><br>
+          Problemas hosting gratuito
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #e74c3c; color: white; text-align: center; font-size: 12px;">
+          <strong>R1</strong><br>
+          Límites API OpenAI excedidos
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #c0392b; color: white; text-align: center; font-size: 12px;">
+          <strong>R2</strong><br>
+          Baja precisión modelo NLP
+        </td>
+      </tr>
+      <tr>
+        <td style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; font-weight: bold; text-align: center;">MEDIO</td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #27ae60; color: white; text-align: center; font-size: 12px;">
+          <strong>R7</strong><br>
+          Documentación incompleta
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #f39c12; color: white; text-align: center; font-size: 12px;">
+          <strong>R5</strong><br>
+          Retrasos desarrollo IAR
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #e74c3c; color: white; text-align: center; font-size: 12px;">
+          <strong>R3</strong><br>
+          Datasets insuficientes
+        </td>
+      </tr>
+      <tr>
+        <td style="border: 2px solid #2c3e50; padding: 10px; background-color: #34495e; color: white; font-weight: bold; text-align: center;">BAJO</td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #27ae60; color: white; text-align: center; font-size: 12px;">
+          <strong>R8</strong><br>
+          Problemas menores UI/UX
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #27ae60; color: white; text-align: center; font-size: 12px;">
+          <strong>R6</strong><br>
+          Errores compatibilidad navegador
+        </td>
+        <td style="border: 2px solid #2c3e50; padding: 12px; background-color: #f39c12; color: white; text-align: center; font-size: 12px;">
+          <strong>R9</strong><br>
+          Fallos integración CSV
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin: 15px 0;">
+    <h4 style="color: #2c3e50;">Leyenda de Colores:</h4>
+    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+      <span style="background-color: #27ae60; color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px;">🟢 Riesgo Bajo</span>
+      <span style="background-color: #f39c12; color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px;">🟡 Riesgo Medio</span>
+      <span style="background-color: #e74c3c; color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px;">🟠 Riesgo Alto</span>
+      <span style="background-color: #c0392b; color: white; padding: 5px 10px; border-radius: 3px; font-size: 12px;">🔴 Riesgo Crítico</span>
+    </div>
+  </div>
+  <h4 style="color: #2c3e50; margin-top: 25px;">Plan de Mitigación por Riesgo:</h4>
+  <table style="border-collapse: collapse; width: 100%; margin: 15px 0;">
+    <thead>
+      <tr style="background-color: #2c3e50; color: white;">
+        <th style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; width: 10%;">ID</th>
+        <th style="border: 1px solid #bdc3c7; padding: 8px; text-align: left; width: 30%;">Riesgo</th>
+        <th style="border: 1px solid #bdc3c7; padding: 8px; text-align: left; width: 40%;">Estrategia de Mitigación</th>
+        <th style="border: 1px solid #bdc3c7; padding: 8px; text-align: left; width: 20%;">Responsable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color: #fadbd8;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R1</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Límites API OpenAI excedidos</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Implementar Hugging Face como alternativa. Optimizar uso de tokens.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #fadbd8;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R2</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Baja precisión modelo NLP</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Generar datasets sintéticos adicionales. Fine-tuning con datos específicos.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #fdf2e9;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R3</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Datasets insuficientes</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Usar Kaggle datasets públicos. Crear datos sintéticos con scripts Python.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #fdf2e9;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R4</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Problemas hosting gratuito</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Tener 3 alternativas listas: Netlify, Vercel, GitHub Pages.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #fdf2e9;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R5</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Retrasos desarrollo IAR</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Implementar versión simplificada primero. Buffer de 2 días extra.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #eafaf1;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R6</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Errores compatibilidad navegador</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Testing en Chrome, Firefox, Edge. Usar vanilla JS estándar.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #eafaf1;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R7</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Documentación incompleta</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Documentar durante desarrollo. Usar templates estandarizados.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #eafaf1;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R8</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Problemas menores UI/UX</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Usar Bootstrap para UI consistente. Priorizar funcionalidad.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+      <tr style="background-color: #fdf2e9;">
+        <td style="border: 1px solid #bdc3c7; padding: 8px; text-align: center; font-weight: bold;">R9</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Fallos integración CSV</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Usar pandas para manejo robusto. Testing con múltiples formatos CSV.</td>
+        <td style="border: 1px solid #bdc3c7; padding: 8px;">Desarrollador</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

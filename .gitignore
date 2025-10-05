@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Database
+*.db
+*.sqlite
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Base de datos
+*.db
+*.sqlite
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (opcional - decide si quieres subir los CSVs/JSONs)
+data/synthetic/*.csv
+data/synthetic/*.json
+data/processed/*.json
+
+# Logs
+*.log
