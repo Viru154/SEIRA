@@ -6,3 +6,5 @@ source venv/bin/activate
 
 # 3. Iniciar servidor Flask
 python backend/app.py
+
+docker compose up -d postgres redis

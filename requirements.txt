@@ -1,26 +1,42 @@
-# SEIRA - Dependencias compatibles con Python 3.13
-
-# Core
+# Web Framework
 Flask==3.0.0
 Flask-CORS==4.0.0
+Flask-SocketIO==5.3.6
 
-# Data processing - Versiones compatibles con Python 3.13
+# Database
+SQLAlchemy==2.0.25
+psycopg2-binary==2.9.9
+alembic==1.13.1
+
+# Task Queue
+celery==5.3.6
+redis==5.0.1
+
+# Data Processing
 pandas==2.2.0
 numpy==1.26.0
 
-# NLP - spaCy
+# NLP
 spacy==3.7.2
-
-# NLP - Hugging Face
+scikit-learn==1.4.0
 transformers==4.36.0
-tokenizers==0.15.0
+
+# Forecasting
+prophet==1.1.6
+
+# Visualization
+plotly==5.24.0
+
+# AI APIs
+google-generativeai==0.3.2
 
 # Utilities
 python-dotenv==1.0.0
 Faker==22.0.0
+python-dateutil==2.8.2
 
-# Database
-SQLAlchemy==2.0.25
+# PDF Generation
+reportlab==4.0.9
 
-# Opcional para análisis
-scikit-learn==1.4.0
+# WebSocket
+python-socketio==5.11.0

@@ -1,0 +1,35 @@
+
+1. Activar entorno virtual
+source venv/bin/activate
+
+2. Levantar Docker (PostgreSQL + Redis)
+# Verificar estado
+docker ps
+
+# Si no están corriendo, levantar
+docker compose up 
+
+# Verificar logs
+docker-compose logs -f
+
+3. Verificar conexión a base de datos
+python -c "from .utils.database import db_manager; db_manager.test_connection()"
+
+4. Verificar datos existentes
+python -c "
+from backend.utils.database import db_manager
+from backend.models.ticket import Ticket
+from backend.models.analisis import Analisis
+from backend.models.recomendacion import Recomendacion
+
+s = db_manager.get_session()
+print(f'✅ Tickets: {s.query(Ticket).count():,}')
+print(f'✅ Análisis: {s.query(Analisis).count():,}')
+print(f'✅ Recomendaciones: {s.query(Recomendacion).count()}')
+s.close()
+"
+
+5. Levantar API Flask
+python backend/app.py
+
+
