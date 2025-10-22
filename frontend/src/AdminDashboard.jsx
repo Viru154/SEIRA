@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import UserManagement from './UserManagement';
+import TicketsSection from './TicketsSection';
+import AnalysisSection from './AnalysisSection';
 import { BarChart, Bar, PieChart, Pie, Cell, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { 
   TrendingUp, DollarSign, Target, AlertCircle, Filter, Download, 
@@ -38,61 +40,54 @@ export default function AdminDashboard({ user, onLogout }) {
     nivelRecomendacion: 'TODOS'
   });
 
-// AdminDashboard.jsx - LÍNEAS 40-55 CORREGIDAS
-
-// AdminDashboard.jsx - LÍNEAS 40-55 CORREGIDAS
-
-useEffect(() => {
-  if (!user) {
-    onLogout();
-    return;
-  }
-  
-  if (user.rol === 'cliente') {
-    setAccessDenied(true);
-    setLoading(false);
-    return;
-  }
-
-  cargarDatos();
-}, [user]); // ✅ CORREGIDO: usar 'user' en lugar de 'authData'
-
-const cargarDatos = async () => {
-  setLoading(true);
-  try {
-    const [resumenRes, recRes, metricasRes] = await Promise.all([
-      fetch(`${API_BASE}/dashboard/resumen`, { credentials: 'include' }),
-      fetch(`${API_BASE}/recomendaciones`, { credentials: 'include' }),
-      fetch(`${API_BASE}/metricas`, { credentials: 'include' })
-    ]);
-
-    // Verificar sesión expirada
-    if (resumenRes.status === 401 || recRes.status === 401 || metricasRes.status === 401) {
-      alert('Sesión expirada. Por favor, inicia sesión nuevamente.');
+  useEffect(() => {
+    if (!user) {
       onLogout();
       return;
     }
-
-    // Verificar si las respuestas son exitosas
-    if (!resumenRes.ok || !recRes.ok || !metricasRes.ok) {
-      throw new Error('Error al cargar datos del dashboard');
+    
+    if (user.rol === 'cliente') {
+      setAccessDenied(true);
+      setLoading(false);
+      return;
     }
 
-    const resumenData = await resumenRes.json();
-    const recData = await recRes.json();
-    const metricasData = await metricasRes.json();
+    cargarDatos();
+  }, [user]);
 
-    setResumen(resumenData);
-    setRecomendaciones(recData);
-    setMetricas(metricasData);
-  } catch (error) {
-    console.error('Error cargando datos:', error);
-    // Opcional: mostrar mensaje de error al usuario
-    alert(`Error al cargar datos: ${error.message}`);
-  } finally {
-    setLoading(false);
-  }
-};
+  const cargarDatos = async () => {
+    setLoading(true);
+    try {
+      const [resumenRes, recRes, metricasRes] = await Promise.all([
+        fetch(`${API_BASE}/dashboard/resumen`, { credentials: 'include' }),
+        fetch(`${API_BASE}/recomendaciones`, { credentials: 'include' }),
+        fetch(`${API_BASE}/metricas`, { credentials: 'include' })
+      ]);
+
+      if (resumenRes.status === 401 || recRes.status === 401 || metricasRes.status === 401) {
+        alert('Sesión expirada. Por favor, inicia sesión nuevamente.');
+        onLogout();
+        return;
+      }
+
+      if (!resumenRes.ok || !recRes.ok || !metricasRes.ok) {
+        throw new Error('Error al cargar datos del dashboard');
+      }
+
+      const resumenData = await resumenRes.json();
+      const recData = await recRes.json();
+      const metricasData = await metricasRes.json();
+
+      setResumen(resumenData);
+      setRecomendaciones(recData);
+      setMetricas(metricasData);
+    } catch (error) {
+      console.error('Error cargando datos:', error);
+      alert(`Error al cargar datos: ${error.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     if (confirm('¿Estás seguro que deseas cerrar sesión?')) {
@@ -319,6 +314,7 @@ const cargarDatos = async () => {
                   {activeSection === 'analytics' && 'Análisis Avanzado'}
                   {activeSection === 'tickets' && 'Gestión de Tickets'}
                   {activeSection === 'reports' && 'Reportes'}
+                  {activeSection === 'users' && 'Gestión de Usuarios'}
                   {activeSection === 'docs' && 'Documentación'}
                 </span>
               </div>
@@ -412,52 +408,60 @@ const cargarDatos = async () => {
 
               {resumen && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-800/40 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:border-purple-500/40 transition-all duration-300">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-purple-300 text-sm font-medium">Total Tickets</span>
-                      <AlertCircle className="text-purple-400" size={24} />
+                      <div className="p-2 bg-purple-500/20 rounded-lg">
+                        <AlertCircle className="text-purple-400" size={24} />
+                      </div>
                     </div>
-                    <p className="text-4xl font-bold text-white">{resumen.total_tickets.toLocaleString()}</p>
-                    <p className="text-purple-200 text-sm mt-2">{resumen.total_categorias} categorías activas</p>
-                    <div className="mt-3 flex items-center gap-2 text-green-400 text-sm">
+                    <p className="text-4xl font-bold text-white mb-2">{resumen.total_tickets.toLocaleString()}</p>
+                    <p className="text-purple-200 text-sm">{resumen.total_categorias} categorías activas</p>
+                    <div className="mt-4 flex items-center gap-2 text-green-400 text-sm">
                       <TrendingUp size={16} />
                       <span>+12% vs mes anterior</span>
                     </div>
                   </div>
 
-                  <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gradient-to-br from-green-900/20 to-slate-800/40 backdrop-blur-sm border border-green-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:border-green-500/40 transition-all duration-300">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-green-300 text-sm font-medium">Ahorro Anual</span>
-                      <DollarSign className="text-green-400" size={24} />
+                      <div className="p-2 bg-green-500/20 rounded-lg">
+                        <DollarSign className="text-green-400" size={24} />
+                      </div>
                     </div>
-                    <p className="text-4xl font-bold text-white">{formatearMoneda(resumen.ahorro_total_anual)}</p>
-                    <p className="text-green-200 text-sm mt-2">ROI: {formatearPorcentaje(resumen.roi_promedio_porcentaje)}</p>
-                    <div className="mt-3 flex items-center gap-2 text-green-400 text-sm">
+                    <p className="text-4xl font-bold text-white mb-2">{formatearMoneda(resumen.ahorro_total_anual)}</p>
+                    <p className="text-green-200 text-sm">ROI: {formatearPorcentaje(resumen.roi_promedio_porcentaje)}</p>
+                    <div className="mt-4 flex items-center gap-2 text-green-400 text-sm">
                       <TrendingUp size={16} />
                       <span>Excelente rendimiento</span>
                     </div>
                   </div>
 
-                  <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gradient-to-br from-blue-900/20 to-slate-800/40 backdrop-blur-sm border border-blue-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:border-blue-500/40 transition-all duration-300">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-blue-300 text-sm font-medium">IAR Promedio</span>
-                      <Target className="text-blue-400" size={24} />
+                      <div className="p-2 bg-blue-500/20 rounded-lg">
+                        <Target className="text-blue-400" size={24} />
+                      </div>
                     </div>
-                    <p className="text-4xl font-bold text-white">{resumen.promedio_iar.toFixed(1)}</p>
-                    <p className="text-blue-200 text-sm mt-2">Índice de Automatización</p>
-                    <div className="mt-3 w-full bg-slate-700 rounded-full h-2">
-                      <div className="bg-blue-500 h-2 rounded-full transition-all" style={{ width: `${resumen.promedio_iar}%` }}></div>
+                    <p className="text-4xl font-bold text-white mb-2">{resumen.promedio_iar.toFixed(1)}</p>
+                    <p className="text-blue-200 text-sm mb-3">Índice de Automatización</p>
+                    <div className="w-full bg-slate-700 rounded-full h-2.5">
+                      <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-2.5 rounded-full transition-all duration-500" style={{ width: `${resumen.promedio_iar}%` }}></div>
                     </div>
                   </div>
 
-                  <div className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-shadow">
+                  <div className="bg-gradient-to-br from-yellow-900/20 to-slate-800/40 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl hover:border-yellow-500/40 transition-all duration-300">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-yellow-300 text-sm font-medium">Prioritarias</span>
-                      <TrendingUp className="text-yellow-400" size={24} />
+                      <div className="p-2 bg-yellow-500/20 rounded-lg">
+                        <TrendingUp className="text-yellow-400" size={24} />
+                      </div>
                     </div>
-                    <p className="text-4xl font-bold text-white">{resumen.categorias_altamente_recomendadas}</p>
-                    <p className="text-yellow-200 text-sm mt-2">Altamente Recomendadas</p>
-                    <div className="mt-3 flex items-center gap-2 text-yellow-400 text-sm">
+                    <p className="text-4xl font-bold text-white mb-2">{resumen.categorias_altamente_recomendadas}</p>
+                    <p className="text-yellow-200 text-sm">Altamente Recomendadas</p>
+                    <div className="mt-4 flex items-center gap-2 text-yellow-400 text-sm">
                       <AlertCircle size={16} />
                       <span>Requieren atención</span>
                     </div>
@@ -465,22 +469,20 @@ const cargarDatos = async () => {
                 </div>
               )}
 
-              <div className="bg-slate-800/30 rounded-xl p-2 border border-purple-500/20">
+              <div className="bg-slate-800/30 backdrop-blur-sm rounded-xl p-2 border border-purple-500/20 shadow-lg">
                 <div className="flex gap-2 overflow-x-auto">
-                  {['overview', 'recomendaciones', 'metricas', 'analisis'].map(tab => (
+                  {['overview', 'recomendaciones'].map(tab => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
                       className={`px-6 py-3 rounded-lg font-medium transition-all whitespace-nowrap ${
                         activeTab === tab
-                          ? 'bg-purple-600 text-white shadow-lg'
-                          : 'text-purple-200 hover:bg-slate-700'
+                          ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg shadow-purple-500/50 scale-105'
+                          : 'text-purple-200 hover:bg-slate-700 hover:text-white'
                       }`}
                     >
                       {tab === 'overview' && '📊 Overview'}
                       {tab === 'recomendaciones' && '🎯 Recomendaciones'}
-                      {tab === 'metricas' && '📈 Métricas'}
-                      {tab === 'analisis' && '🔍 Análisis'}
                     </button>
                   ))}
                 </div>
@@ -634,136 +636,21 @@ const cargarDatos = async () => {
                   </div>
                 </div>
               )}
-
-              {activeTab === 'metricas' && (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {metricas.map(metrica => (
-                    <div key={metrica.id} className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl">
-                      <h3 className="text-xl font-bold text-white mb-4 border-b border-purple-500/30 pb-2">
-                        {metrica.categoria.replace(/_/g, ' ')}
-                      </h3>
-                      
-                      <div className="space-y-4">
-                        <div className="flex justify-between items-center">
-                          <span className="text-purple-200">Total Tickets:</span>
-                          <span className="text-white font-bold text-lg">{metrica.total_tickets.toLocaleString()}</span>
-                        </div>
-                        
-                        <div className="flex justify-between items-center">
-                          <span className="text-purple-200">Complejidad:</span>
-                          <span className="text-white font-bold">{metrica.complejidad_promedio.toFixed(1)}</span>
-                        </div>
-                        
-                        <div className="mt-4">
-                          <p className="text-purple-300 text-sm mb-3 font-semibold">Urgencia:</p>
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-red-300 flex items-center gap-2">
-                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                                Crítica:
-                              </span>
-                              <span className="text-white">{metrica.urgencia_critica}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-orange-300 flex items-center gap-2">
-                                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                                Alta:
-                              </span>
-                              <span className="text-white">{metrica.urgencia_alta}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-yellow-300 flex items-center gap-2">
-                                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                                Media:
-                              </span>
-                              <span className="text-white">{metrica.urgencia_media}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-green-300 flex items-center gap-2">
-                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                                Baja:
-                              </span>
-                              <span className="text-white">{metrica.urgencia_baja}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="mt-4">
-                          <p className="text-purple-300 text-sm mb-3 font-semibold">Sentimiento:</p>
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-green-300">😊 Positivo:</span>
-                              <span className="text-white">{metrica.sentimiento_positivo}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-gray-300">😐 Neutral:</span>
-                              <span className="text-white">{metrica.sentimiento_neutral}</span>
-                            </div>
-                            <div className="flex justify-between items-center text-sm">
-                              <span className="text-red-300">😞 Negativo:</span>
-                              <span className="text-white">{metrica.sentimiento_negativo}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {activeTab === 'analisis' && (
-                <div className="space-y-4">
-                  {recomendaciones.slice(0, 6).map(rec => (
-                    <div key={rec.id} className="bg-slate-800/50 rounded-xl p-6 border border-purple-500/30 shadow-lg">
-                      <div className="flex items-center justify-between mb-4">
-                        <h3 className="text-xl font-bold text-white">{rec.categoria.replace(/_/g, ' ')}</h3>
-                        <span className="px-4 py-2 bg-purple-600 text-white rounded-full font-bold text-lg">
-                          IAR: {rec.iar_score.toFixed(1)}
-                        </span>
-                      </div>
-                      
-                      <p className="text-purple-100 mb-4 leading-relaxed">{rec.recomendacion_texto}</p>
-                      
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="bg-slate-700/50 rounded-lg p-4">
-                          <p className="text-purple-300 text-sm mb-1">Razón Principal:</p>
-                          <p className="text-white font-medium">{rec.razon_principal}</p>
-                        </div>
-                        <div className="bg-slate-700/50 rounded-lg p-4">
-                          <p className="text-purple-300 text-sm mb-1">Prioridad:</p>
-                          <span className={`inline-block px-3 py-1 rounded text-sm font-semibold ${
-                            rec.prioridad === 'ALTA' ? 'bg-red-500/20 text-red-300' :
-                            rec.prioridad === 'MEDIA' ? 'bg-yellow-500/20 text-yellow-300' :
-                            'bg-green-500/20 text-green-300'
-                          }`}>
-                            {rec.prioridad}
-                          </span>
-                        </div>
-                      </div>
-                      
-                      {rec.acciones_sugeridas && rec.acciones_sugeridas.length > 0 && (
-                        <div className="bg-slate-700/30 rounded-lg p-4">
-                          <p className="text-purple-300 text-sm font-semibold mb-2">Acciones Sugeridas:</p>
-                          <ul className="space-y-2">
-                            {rec.acciones_sugeridas.map((accion, idx) => (
-                              <li key={idx} className="text-purple-100 text-sm flex items-start gap-2">
-                                <span className="text-purple-400 mt-1">▸</span>
-                                <span>{accion}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           )}
+
+          {activeSection === 'analytics' && tienePermiso('analisis') && (
+            <AnalysisSection />
+          )}
+
+          {activeSection === 'tickets' && tienePermiso('tickets') && (
+            <TicketsSection />
+          )}
+
           {activeSection === 'users' && tienePermiso('admin') && (
             <UserManagement user={user} />
-
           )}
+
           {activeSection === 'docs' && (
             <div className="space-y-6">
               <div>
@@ -776,7 +663,7 @@ const cargarDatos = async () => {
                   href="/docs/Checklist.html" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:border-purple-500/50"
                 >
                   <FileText className="text-purple-400 mb-4" size={40} />
                   <h3 className="text-xl font-bold text-white mb-2">Checklist</h3>
@@ -787,7 +674,7 @@ const cargarDatos = async () => {
                   href="/docs/Gannt.html" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:border-purple-500/50"
                 >
                   <BarChart2 className="text-purple-400 mb-4" size={40} />
                   <h3 className="text-xl font-bold text-white mb-2">Diagrama Gantt</h3>
@@ -798,7 +685,7 @@ const cargarDatos = async () => {
                   href="/docs/Matriz.html" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                  className="bg-slate-800/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 hover:border-purple-500/50"
                 >
                   <Database className="text-purple-400 mb-4" size={40} />
                   <h3 className="text-xl font-bold text-white mb-2">Matriz</h3>
@@ -807,7 +694,8 @@ const cargarDatos = async () => {
               </div>
             </div>
           )}
-          {(activeSection === 'analytics' || activeSection === 'tickets' || activeSection === 'reports') && (
+
+          {activeSection === 'reports' && (
             <div className="text-center py-20">
               <div className="inline-block p-6 bg-slate-800 rounded-xl shadow-xl">
                 <HelpCircle className="text-purple-400 mx-auto mb-4" size={60} />
@@ -815,9 +703,7 @@ const cargarDatos = async () => {
                   Sección en Desarrollo
                 </h3>
                 <p className="text-purple-200">
-                  {activeSection === 'analytics' && 'Análisis avanzado estará disponible en Fase 5'}
-                  {activeSection === 'tickets' && 'Gestión de tickets próximamente'}
-                  {activeSection === 'reports' && 'Sistema de reportes en construcción'}
+                  Sistema de reportes en construcción
                 </p>
               </div>
             </div>
