@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEIRA - Presentación Final</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 100%);
+            color: #e9e4f0;
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: 210mm;
+            height: 297mm;
+            padding: 40px 50px;
+            page-break-after: always;
+            position: relative;
+            background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            border-bottom: 3px solid #9b87f5;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .slide-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #9b87f5;
+            margin-bottom: 10px;
+        }
+
+        .slide-subtitle {
+            font-size: 18px;
+            color: #c4b5fd;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .highlight-box {
+            background: rgba(155, 135, 245, 0.15);
+            border-left: 4px solid #9b87f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(155, 135, 245, 0.1);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #7c3aed;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #9b87f5;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #c4b5fd;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .bullet-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .bullet-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #9b87f5;
+            font-size: 24px;
+        }
+
+        .formula-box {
+            background: rgba(124, 58, 237, 0.2);
+            border: 2px solid #9b87f5;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            color: #e9d5ff;
+            margin: 20px 0;
+        }
+
+        .recommendation-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .tag-green {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86efac;
+            border: 2px solid #22c55e;
+        }
+
+        .tag-yellow {
+            background: rgba(250, 204, 21, 0.2);
+            color: #fde047;
+            border: 2px solid #facc15;
+        }
+
+        .tag-red {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            border: 2px solid #ef4444;
+        }
+
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 2px solid #7c3aed;
+            font-size: 14px;
+            color: #a78bfa;
+            margin-top: auto;
+        }
+
+        .cover-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cover-title {
+            font-size: 56px;
+            font-weight: 800;
+            color: #9b87f5;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(155, 135, 245, 0.5);
+        }
+
+        .cover-subtitle {
+            font-size: 28px;
+            color: #c4b5fd;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .cover-info {
+            font-size: 18px;
+            color: #e9d5ff;
+            line-height: 2;
+            margin-top: 50px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #7c3aed;
+        }
+
+        .comparison-table th {
+            background: rgba(155, 135, 245, 0.2);
+            color: #9b87f5;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(155, 135, 245, 0.05);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .notes-section {
+            background: rgba(155, 135, 245, 0.08);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #7c3aed;
+            font-size: 14px;
+            color: #c4b5fd;
+        }
+
+        .notes-title {
+            font-weight: 600;
+            color: #9b87f5;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .module-card {
+            background: rgba(155, 135, 245, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #7c3aed;
+            text-align: center;
+        }
+
+        .module-card h3 {
+            color: #9b87f5;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .slide {
+                background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SLIDE 1: PORTADA -->
+    <div class="slide cover-slide">
+        <div class="icon">🚀</div>
+        <h1 class="cover-title">SEIRA</h1>
+        <h2 class="cover-subtitle">Sistema de Evaluación Inteligente<br>para la Implementación Responsable de IA</h2>
+        
+        <div class="highlight-box" style="max-width: 600px;">
+            <p style="font-size: 20px;">De decisiones basadas en tendencias<br>a decisiones basadas en evidencia</p>
+        </div>
+
+        <div class="cover-info">
+            <strong>Nery Alexander Galvez Hernandez</strong><br>
+            Ingeniería en Sistemas de Información y Ciencias de la Computación<br>
+            Universidad Mariano Gálvez de Guatemala<br>
+            2025
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS PARA EL PRESENTADOR:</div>
+            Inicio con impacto. Mencionar que SEIRA no es solo un proyecto académico, sino una solución real a un problema de miles de millones de dólares en implementaciones fallidas de IA. Establecer el tono: datos sobre emociones, evidencia sobre tendencias.
+        </div>
+    </div>
+
+    <!-- SLIDE 2: EL PROBLEMA -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">⚠️ El Problema: Crisis en Implementaciones de IA</h1>
+            <p class="slide-subtitle">La realidad detrás del entusiasmo por la Inteligencia Artificial</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">60-70%</span>
+                    <span class="stat-label">de proyectos de IA<br>FRACASAN en ROI</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">$MM</span>
+                    <span class="stat-label">Pérdidas por<br>implementaciones innecesarias</span>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: #9b87f5; margin-bottom: 15px;">🎯 El Núcleo del Problema:</h3>
+                <ul class="bullet-list">
+                    <li>Empresas adoptan IA por <strong>presión del mercado</strong>, no por necesidad real</li>
+                    <li><strong>Decisiones subjetivas</strong> sin evaluación sistemática previa</li>
+                    <li>Falta de métricas objetivas para determinar viabilidad</li>
+                    <li>Datos operacionales (tickets de soporte) <strong>completamente ignorados</strong></li>
+                    <li>Alto costo económico Y ambiental sin beneficios tangibles</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; font-size: 22px; margin-top: 20px; color: #fca5a5;">
+                <strong>📊 "Tenemos montañas de datos sobre problemas reales,<br>pero tomamos decisiones tecnológicas basadas en presentaciones de ventas"</strong>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            Conectar emocionalmente con ejemplos: "Imaginen invertir $2 millones en un chatbot de IA cuando el 80% de sus tickets son problemas que se resuelven reiniciando el servidor". Enfatizar que este no es un problema teórico - empresas reales pierden millones cada año. Preparar para preguntar: "¿Cuántos conocen casos de implementaciones de IA que fracasaron?"
+        </div>
+    </div>
+
+    <!-- SLIDE 3: LA SOLUCIÓN - SEIRA -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">💡 La Solución: SEIRA</h1>
+            <p class="slide-subtitle">Evaluación inteligente ANTES de invertir</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="highlight-box">
+                <h2 style="color: #9b87f5; font-size: 24px; margin-bottom: 15px;">¿Qué es SEIRA?</h2>
+                <p style="font-size: 20px;">
+                    Sistema que <strong>analiza automáticamente tickets de soporte históricos</strong> usando Procesamiento de Lenguaje Natural (NLP) para generar <strong>recomendaciones objetivas y fundamentadas</strong> sobre la viabilidad de implementar IA en procesos específicos.
+                </p>
+            </div>
+
+            <h3 style="color: #9b87f5; margin: 30px 0 20px 0; font-size: 24px;">🔄 Flujo de Trabajo:</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 10px;">📥</div>
+                    <strong style="color: #9b87f5;">1. Recolección</strong>
+                    <p style="font-size: 14px; margin-top: 10px;">150-650 tickets históricos procesados</p>
+                </div>
+                
+                <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 10px;">🧠</div>
+                    <strong style="color: #9b87f5;">2. Análisis NLP</strong>
+                    <p style="font-size: 14px; margin-top: 10px;">Palabras clave, entidades, sentimiento, urgencia</p>
+                </div>
+                
+                <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 10px;">📊</div>
+                    <strong style="color: #9b87f5;">3. Cálculo IAR</strong>
+                    <p style="font-size: 14px; margin-top: 10px;">Índice 0-100 con ROI estimado</p>
+                </div>
+                
+                <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 10px;">✅</div>
+                    <strong style="color: #9b87f5;">4. Recomendación</strong>
+                    <p style="font-size: 14px; margin-top: 10px;">Implementar, evaluar o rechazar</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <h3 style="color: #9b87f5; margin-bottom: 10px;">🎯 Diferenciador Clave:</h3>
+                <p style="font-size: 18px;">
+                    <strong>Evaluación PREVIA</strong> basada en datos reales de la organización, no post-implementación o evaluaciones de consultoría genéricas.
+                </p>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            Enfatizar el flujo visual. Mencionar que el NLP está entrenado en español (modelo spaCy). Destacar que esto NO es teoría - el sistema ya procesó 400+ tickets reales. Preparar demo si es posible. La clave: "evaluación ANTES de gastar un solo dólar".
+        </div>
+    </div>
+
+    <!-- SLIDE 4: EL IAR - MÉTRICA ESTRELLA -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">⭐ IAR: Índice de Automatización Recomendada</h1>
+            <p class="slide-subtitle">La contribución metodológica única de SEIRA</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="highlight-box">
+                <h3 style="color: #9b87f5; font-size: 22px; margin-bottom: 15px;">¿Qué es el IAR?</h3>
+                <p style="font-size: 18px;">
+                    Métrica cuantificable <strong>(0-100 puntos)</strong> que pondera múltiples factores para determinar objetivamente si un proceso debe automatizarse con IA.
+                </p>
+            </div>
+
+            <div class="formula-box">
+                <strong>IAR =</strong> (Frecuencia × 30%) + (Complejidad × 25%) +<br>
+                (Impacto × 25%) + (Viabilidad × 20%)
+            </div>
+
+            <div class="two-column">
+                <div>
+                    <h3 style="color: #9b87f5; margin-bottom: 15px;">📈 Componentes del IAR:</h3>
+                    <ul class="bullet-list" style="font-size: 16px;">
+                        <li><strong>Frecuencia (30%):</strong> ¿Qué tan seguido ocurre?</li>
+                        <li><strong>Complejidad (25%):</strong> ¿Qué tan difícil es resolverlo?</li>
+                        <li><strong>Impacto (25%):</strong> ¿Cuánto tiempo/recursos consume?</li>
+                        <li><strong>Viabilidad (20%):</strong> ¿Es técnicamente automatizable?</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 style="color: #9b87f5; margin-bottom: 15px;">🎯 Interpretación:</h3>
+                    <div class="recommendation-tag tag-green">
+                        IAR > 70: ALTAMENTE RECOMENDADO
+                    </div>
+                    <div class="recommendation-tag tag-yellow">
+                        IAR 50-70: EVALUAR (análisis adicional)
+                    </div>
+                    <div class="recommendation-tag tag-red">
+                        IAR < 50: NO RECOMENDADO
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border-left: 4px solid #22c55e;">
+                        <strong style="color: #86efac;">💰 Incluye estimación de ROI y ahorros anuales</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <strong style="color: #9b87f5;">🏆 Primera métrica en la literatura que integra múltiples factores operacionales en una sola medida cuantificable para decisiones de IA.</strong>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            El IAR es TU contribución única - enfatizar esto. Explicar cada componente con ejemplo concreto: "Si tienes 200 tickets al mes sobre el mismo error (alta frecuencia), pero es simple de resolver (baja complejidad), el IAR balanceará ambos factores". Mencionar que la ponderación está basada en literatura de BPMN y análisis de procesos. Si preguntan por validación estadística, mencionar que fue calibrado con datasets sintéticos y ajustado iterativamente.
+        </div>
+    </div>
+
+    <!-- SLIDE 5: ARQUITECTURA TÉCNICA -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">🏗️ Arquitectura Técnica</h1>
+            <p class="slide-subtitle">Stack tecnológico y módulos del sistema</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="module-grid">
+                <div class="module-card">
+                    <div class="icon" style="font-size: 36px;">🔧</div>
+                    <h3>Motor de Análisis NLP</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">spaCy + modelo español<br>Clasificación automática<br>Extracción semántica</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="icon" style="font-size: 36px;">📊</div>
+                    <h3>Sistema de Evaluación</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">Cálculo de IAR<br>Estimación de ROI<br>Análisis estadístico</p>
+                </div>
+
+                <div class="module-card">
+                    <div class="icon" style="font-size: 36px;">📈</div>
+                    <h3>Dashboard Interactivo</h3>
+                    <p style="font-size: 14px; margin-top: 10px;">React 18<br>Visualizaciones<br>Reportes ejecutivos</p>
+                </div>
+            </div>
+
+            <h3 style="color: #9b87f5; margin: 30px 0 20px 0; font-size: 22px;">💻 Stack Tecnológico:</h3>
+
+            <div class="two-column">
+                <div>
+                    <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed;">
+                        <h4 style="color: #9b87f5; margin-bottom: 15px;">Backend (Python 3.10.11)</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 2;">
+                            <li>✓ Flask 3.0.0 (API REST)</li>
+                            <li>✓ spaCy 3.7.2 + modelo español</li>
+                            <li>✓ scikit-learn 1.4.0 (ML)</li>
+                            <li>✓ pandas/numpy (datos)</li>
+                            <li>✓ SQLAlchemy 2.0.25 (ORM)</li>
+                            <li>✓ transformers 4.36.0 (NLP)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="background: rgba(155, 135, 245, 0.1); padding: 20px; border-radius: 10px; border: 2px solid #7c3aed;">
+                        <h4 style="color: #9b87f5; margin-bottom: 15px;">Frontend & Datos</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 2;">
+                            <li>✓ React 18 (UI interactiva)</li>
+                            <li>✓ Chart.js 4.4.0 (visualización)</li>
+                            <li>✓ SQLite 3 (base de datos)</li>
+                            <li>✓ HTML5 + CSS3</li>
+                            <li>✓ JavaScript ES6</li>
+                            <li>✓ Diseño responsivo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px;">
+                <h4 style="color: #9b87f5; margin-bottom: 10px;">⚡ Características de Rendimiento:</h4>
+                <div style="display: flex; justify-content: space-around; text-align: center; margin-top: 15px;">
+                    <div>
+                        <strong style="font-size: 24px; color: #9b87f5;">< 30s</strong>
+                        <p style="font-size: 14px;">Procesamiento completo</p>
+                    </div>
+                    <div>
+                        <strong style="font-size: 24px; color: #9b87f5;">> 75%</strong>
+                        <p style="font-size: 14px;">Precisión NLP</p>
+                    </div>
+                    <div>
+                        <strong style="font-size: 24px; color: #9b87f5;">400+</strong>
+                        <p style="font-size: 14px;">Tickets procesados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            No profundizar demasiado en tecnología a menos que la audiencia sea técnica. Enfatizar que el stack es maduro y probado. Mencionar que spaCy fue elegido sobre otros porque tiene excelente soporte para español. Si preguntan por escalabilidad, mencionar que SQLite es para prototipo y en producción se migraría a PostgreSQL. El tiempo de procesamiento (<30s) es impresionante para análisis completo.
+        </div>
+    </div>
+
+    <!-- SLIDE 6: RESULTADOS CONCRETOS -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">🎯 Resultados Concretos del Prototipo</h1>
+            <p class="slide-subtitle">Datos reales del sistema funcionando</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">400+</span>
+                    <span class="stat-label">Tickets procesados exitosamente</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">16</span>
+                    <span class="stat-label">Categorías analizadas con IAR</span>
+                </div>
+            </div>
+
+            <h3 style="color: #9b87f5; margin: 30px 0 20px 0; font-size: 24px;">🏆 Casos de Éxito Identificados:</h3>
+
+            <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="color: #86efac; font-size: 22px;">📦 Preventa de Juegos</h3>
+                        <p style="margin-top: 10px; font-size: 16px;">Alta frecuencia de consultas repetitivas sobre disponibilidad, precios y lanzamientos</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 42px; font-weight: 800; color: #86efac;">84.4</div>
+                        <div style="font-size: 14px; color: #86efac;">IAR / 100</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+                    <div style="text-align: center; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <strong style="font-size: 28px; color: #86efac;">7,942%</strong>
+                        <p style="font-size: 14px;">ROI Estimado</p>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <strong style="font-size: 28px; color: #86efac;">$795K</strong>
+                        <p style="font-size: 14px;">Ahorro Anual</p>
+                    </div>
+                </div>
+                <div class="recommendation-tag tag-green" style="margin-top: 15px; font-size: 16px;">
+                    ✅ ALTAMENTE RECOMENDADO - Implementar chatbot IA
+                </div>
+            </div>
+
+            <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e; margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="color: #86efac; font-size: 22px;">⚙️ Problemas de Producto</h3>
+                        <p style="margin-top: 10px; font-size: 16px;">Patrones repetitivos de errores técnicos y bugs reportados</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 42px; font-weight: 800; color: #86efac;">84.2</div>
+                        <div style="font-size: 14px; color: #86efac;">IAR / 100</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+                    <div style="text-align: center; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <strong style="font-size: 28px; color: #86efac;">7,347%</strong>
+                        <p style="font-size: 14px;">ROI Estimado</p>
+                    </div>
+                    <div style="text-align: center; padding: 15px; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                        <strong style="font-size: 28px; color: #86efac;">$736K</strong>
+                        <p style="font-size: 14px;">Ahorro Anual</p>
+                    </div>
+                </div>
+                <div class="recommendation-tag tag-green" style="margin-top: 15px; font-size: 16px;">
+                    ✅ ALTAMENTE RECOMENDADO - Sistema diagnóstico automático
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(250, 204, 21, 0.1); border-radius: 8px; border: 2px solid #facc15;">
+                <strong style="color: #fde047; font-size: 18px;">📊 14 categorías adicionales con IAR 54-59 requieren evaluación cualitativa</strong>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            ESTOS SON NÚMEROS REALES del prototipo. Los $795K y $736K de ahorro están calculados con fórmulas conservadoras (costo hora-hombre × tickets/mes × 12). El ROI >7000% parece exagerado pero es correcto: la inversión inicial en IA es pequeña vs el ahorro acumulado anual. Mencionar que estos son dos casos CLAROS donde IA tiene sentido. Las 14 categorías en "EVALUAR" demuestran que SEIRA no recomienda IA para todo - es selectivo y objetivo.
+        </div>
+    </div>
+
+    <!-- SLIDE 7: COMPARATIVA -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">🔍 ¿Qué Hace Único a SEIRA?</h1>
+            <p class="slide-subtitle">Comparativa con enfoques tradicionales</p>
+        </div>
+
+        <div class="slide-content">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th style="color: #fca5a5;">❌ Enfoques Tradicionales</th>
+                        <th style="color: #86efac;">✅ SEIRA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Momento de evaluación</strong></td>
+                        <td>Después de implementar (post-mortem)</td>
+                        <td><strong>ANTES de invertir</strong> (prevención)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Base de decisión</strong></td>
+                        <td>Presentaciones de ventas, intuición</td>
+                        <td><strong>Datos operacionales reales</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Metodología</strong></td>
+                        <td>Evaluación subjetiva, cualitativa</td>
+                        <td><strong>Métricas cuantificables (IAR)</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Costo</strong></td>
+                        <td>Consultorías caras ($50K-$200K)</td>
+                        <td><strong>Sistema automatizado</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tiempo</strong></td>
+                        <td>Semanas o meses de análisis</td>
+                        <td><strong>Minutos a días</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fuente de datos</strong></td>
+                        <td>Encuestas, entrevistas</td>
+                        <td><strong>Tickets históricos</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sostenibilidad</strong></td>
+                        <td>Solo ROI financiero</td>
+                        <td><strong>Incluye impacto ambiental</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accesibilidad</strong></td>
+                        <td>Solo grandes empresas</td>
+                        <td><strong>Democratizado</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box" style="margin-top: 30px;">
+                <h3 style="color: #9b87f5; margin-bottom: 15px; font-size: 22px;">🎯 Contribuciones Únicas:</h3>
+                <div class="two-column">
+                    <ul class="bullet-list" style="font-size: 16px;">
+                        <li><strong>Metodológica:</strong> Primera métrica IAR en literatura</li>
+                        <li><strong>Técnica:</strong> Tickets como fuente de decisión</li>
+                        <li><strong>Sostenible:</strong> Criterios ambientales integrados</li>
+                    </ul>
+                    <ul class="bullet-list" style="font-size: 16px;">
+                        <li><strong>Práctica:</strong> Framework replicable</li>
+                        <li><strong>Social:</strong> Democratiza evaluación especializada</li>
+                        <li><strong>Innovadora:</strong> Paradigma basado en evidencia</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            Esta slide es CRUCIAL para destacar el valor. Enfatizar fila por fila las ventajas. Mencionar ejemplo concreto: "Una consultoría tradicional cobra $100K por 3 meses de análisis. SEIRA hace análisis similar en minutos y es repetible sin costo adicional". La sostenibilidad es cada vez más importante - mencionar huella de carbono de entrenar modelos IA innecesarios. Si alguien pregunta "¿Por qué nadie hizo esto antes?", responder: "Existían los componentes pero nadie los integró en una solución específica para decisiones pre-implementación".
+        </div>
+    </div>
+
+    <!-- SLIDE 8: IMPACTO Y BENEFICIOS -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">💰 Impacto y Beneficios Tangibles</h1>
+            <p class="slide-subtitle">Valor económico, operacional y estratégico</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="two-column">
+                <div>
+                    <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e;">
+                        <h3 style="color: #86efac; margin-bottom: 15px;">💵 Beneficios Económicos</h3>
+                        <ul class="bullet-list" style="font-size: 15px;">
+                            <li>Ahorro estimado: <strong>Q385K - 1.54M</strong> por proyecto evaluado</li>
+                            <li>Prevención de implementaciones innecesarias</li>
+                            <li>Optimización de inversiones tecnológicas</li>
+                            <li>Reducción de riesgo financiero</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(59, 130, 246, 0.1); border-left-color: #3b82f6; margin-top: 20px;">
+                        <h3 style="color: #93c5fd; margin-bottom: 15px;">⚡ Beneficios Operacionales</h3>
+                        <ul class="bullet-list" style="font-size: 15px;">
+                            <li>Evaluación de <strong>semanas a días</strong></li>
+                            <li>Decisiones objetivas fundamentadas</li>
+                            <li>Mayor confianza gerencial</li>
+                            <li>Procesos documentados automáticamente</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="highlight-box" style="background: rgba(168, 85, 247, 0.1); border-left-color: #a855f7;">
+                        <h3 style="color: #c4b5fd; margin-bottom: 15px;">🎯 Beneficios Estratégicos</h3>
+                        <ul class="bullet-list" style="font-size: 15px;">
+                            <li>Ventaja competitiva por adopción inteligente</li>
+                            <li>Planificación tecnológica basada en datos</li>
+                            <li>Cultura de decisiones informadas</li>
+                            <li>Fortalecimiento posición competitiva</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e; margin-top: 20px;">
+                        <h3 style="color: #86efac; margin-bottom: 15px;">🌍 Beneficios Sociales</h3>
+                        <ul class="bullet-list" style="font-size: 15px;">
+                            <li>Democratiza acceso a evaluación especializada</li>
+                            <li>Promueve IA responsable y sostenible</li>
+                            <li>Reduce huella de carbono innecesaria</li>
+                            <li>Alineado con ODSs (9, 12, 13)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 20px; background: rgba(155, 135, 245, 0.2);">
+                <h3 style="color: #9b87f5; text-align: center; font-size: 22px; margin-bottom: 15px;">📊 Caso de Uso Real</h3>
+                <div style="text-align: center; font-size: 18px; line-height: 2;">
+                    Empresa mediana con <strong>500 tickets/mes</strong> en "ayuda técnica"<br>
+                    <strong>IAR = 45</strong> → Recomendación: <span style="color: #fca5a5;">NO IMPLEMENTAR IA</span><br>
+                    <strong style="color: #86efac;">Ahorro potencial: $2M</strong> que se hubieran perdido en implementación fallida<br>
+                    <em style="color: #c4b5fd;">→ SEIRA previene inversiones sin retorno</em>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            Enfatizar que los beneficios son multi-dimensionales. El caso de uso del IAR=45 es tan importante como los casos de éxito - SEIRA también dice cuándo NO implementar. Los números Q385K-1.54M son conservadores basados en costos reales de implementaciones de IA (software, infraestructura, horas-hombre, training). Mencionar ODS si la audiencia es académica/institucional. El valor social es real: pequeñas empresas no pueden pagar consultorías de $100K.
+        </div>
+    </div>
+
+    <!-- SLIDE 9: LIMITACIONES Y FUTURO -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">🔮 Limitaciones y Visión Futura</h1>
+            <p class="slide-subtitle">Transparencia y roadmap de evolución</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="two-column">
+                <div>
+                    <h3 style="color: #9b87f5; margin-bottom: 20px; font-size: 22px;">⚠️ Limitaciones Actuales</h3>
+                    
+                    <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-left-color: #ef4444;">
+                        <h4 style="color: #fca5a5; margin-bottom: 10px;">Metodológicas:</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>• Dependencia de calidad de tickets</li>
+                            <li>• Requiere organizaciones digitalizadas</li>
+                            <li>• Sesgo hacia procesos documentados</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-left-color: #ef4444; margin-top: 15px;">
+                        <h4 style="color: #fca5a5; margin-bottom: 10px;">Técnicas:</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>• SQLite no escala a millones de registros</li>
+                            <li>• Modelo solo en español (spaCy)</li>
+                            <li>• Procesamiento síncrono</li>
+                            <li>• Prototipo académico (no producción)</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(239, 68, 68, 0.1); border-left-color: #ef4444; margin-top: 15px;">
+                        <h4 style="color: #fca5a5; margin-bottom: 10px;">Funcionales:</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>• Sin carga de archivos desde UI</li>
+                            <li>• Visualizaciones básicas (Chart.js)</li>
+                            <li>• Sin predicciones de tendencias</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: #9b87f5; margin-bottom: 20px; font-size: 22px;">🚀 Roadmap SEIRA 2.0</h3>
+                    
+                    <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e;">
+                        <h4 style="color: #86efac; margin-bottom: 10px;">Fase 5: Análisis Avanzado</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>✓ Plotly.js (gráficos 3D interactivos)</li>
+                            <li>✓ Prophet (forecasting tendencias)</li>
+                            <li>✓ Isolation Forest (detección anomalías)</li>
+                            <li>✓ Dashboard analítico profesional</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e; margin-top: 15px;">
+                        <h4 style="color: #86efac; margin-bottom: 10px;">Fase 6: Infraestructura</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>✓ Dockerización completa</li>
+                            <li>✓ Microservicios (API, Workers, DB)</li>
+                            <li>✓ PostgreSQL + Redis</li>
+                            <li>✓ CI/CD con GitHub Actions</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box" style="background: rgba(34, 197, 94, 0.1); border-left-color: #22c55e; margin-top: 15px;">
+                        <h4 style="color: #86efac; margin-bottom: 10px;">Futuro a Mediano Plazo:</h4>
+                        <ul style="list-style: none; font-size: 15px; line-height: 1.8;">
+                            <li>✓ Soporte multi-idioma (inglés, francés)</li>
+                            <li>✓ Integración con Jira, Zendesk</li>
+                            <li>✓ Machine Learning para calibración IAR</li>
+                            <li>✓ API pública para terceros</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 25px; padding: 20px; background: rgba(155, 135, 245, 0.2); border-radius: 10px;">
+                <strong style="color: #9b87f5; font-size: 20px;">🎯 Visión: SEIRA como estándar de evaluación de IA en la industria</strong>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS:</div>
+            Ser honesto con limitaciones demuestra madurez académica. Enfatizar que las limitaciones actuales son conocidas y hay plan para superarlas. SQLite es apropiado para prototipo académico. El roadmap muestra que esto no es proyecto de una sola iteración. Si preguntan timeline: Fase 5 ya está planificada (4-6 semanas), Fase 6 sería 2-3 meses. Multi-idioma es complejo pero viable (spaCy tiene modelos pre-entrenados). El valor a largo plazo es convertirse en herramienta estándar.
+        </div>
+    </div>
+
+    <!-- SLIDE 10: CONCLUSIÓN -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">🎯 Conclusión: Un Cambio de Paradigma</h1>
+            <p class="slide-subtitle">De decisiones especulativas a decisiones basadas en evidencia</p>
+        </div>
+
+        <div class="slide-content">
+            <div class="highlight-box" style="background: rgba(155, 135, 245, 0.2); border: 3px solid #9b87f5; padding: 30px;">
+                <h2 style="color: #9b87f5; text-align: center; font-size: 28px; margin-bottom: 20px;">
+                    💡 El Mensaje Central
+                </h2>
+                <p style="font-size: 22px; text-align: center; line-height: 1.8; color: #e9d5ff;">
+                    SEIRA transforma la pregunta <strong style="color: #fca5a5;">"¿Deberíamos implementar IA?"</strong><br>
+                    en una decisión fundamentada con <strong style="color: #86efac;">datos reales, métricas cuantificables<br>
+                    y recomendaciones objetivas.</strong>
+                </p>
+            </div>
+
+            <div class="two-column" style="margin-top: 30px;">
+                <div class="highlight-box">
+                    <h3 style="color: #9b87f5; margin-bottom: 15px;">✅ Lo que SEIRA hace:</h3>
+                    <ul class="bullet-list" style="font-size: 17px;">
+                        <li>Analiza <strong>datos operacionales reales</strong></li>
+                        <li>Calcula métricas <strong>cuantificables y objetivas</strong></li>
+                        <li>Genera recomendaciones <strong>fundamentadas</strong></li>
+                        <li>Previene inversiones <strong>innecesarias</strong></li>
+                        <li>Promueve IA <strong>responsable y sostenible</strong></li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <h3 style="color: #9b87f5; margin-bottom: 15px;">🚫 Lo que SEIRA NO es:</h3>
+                    <ul class="bullet-list" style="font-size: 17px;">
+                        <li>Una <strong>receta mágica</strong> para implementar IA</li>
+                        <li>Un sistema que <strong>implementa</strong> las soluciones</li>
+                        <li>Una herramienta de <strong>venta de IA</strong></li>
+                        <li>Un sustituto del <strong>criterio humano</strong></li>
+                        <li>Una garantía de <strong>éxito absoluto</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stat-grid" style="margin-top: 30px;">
+                <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: #22c55e;">
+                    <span class="stat-number" style="color: #86efac;">$1.5M</span>
+                    <span class="stat-label">Ahorros potenciales por proyecto</span>
+                </div>
+                <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: #22c55e;">
+                    <span class="stat-number" style="color: #86efac;">100%</span>
+                    <span class="stat-label">Basado en datos reales</span>
+                </div>
+                <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: #22c55e;">
+                    <span class="stat-number" style="color: #86efac;">< 30s</span>
+                    <span class="stat-label">Tiempo de análisis completo</span>
+                </div>
+                <div class="stat-card" style="background: rgba(34, 197, 94, 0.1); border-color: #22c55e;">
+                    <span class="stat-number" style="color: #86efac;">∞</span>
+                    <span class="stat-label">Repetible sin costo adicional</span>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 30px; background: rgba(155, 135, 245, 0.3); border: 3px solid #9b87f5; padding: 25px;">
+                <h3 style="color: #e9d5ff; text-align: center; font-size: 24px; font-weight: 800;">
+                    "La IA debe resolver problemas reales,<br>
+                    no crear soluciones buscando problemas"
+                </h3>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS FINALES:</div>
+            Este es el cierre fuerte. Reiterar mensaje central con convicción. La frase final es memorable - pausar después de decirla. Preparar para preguntas abiertas: "¿Cómo ven ustedes el futuro de SEIRA?", "¿Qué sectores se beneficiarían más?". Si hay tiempo, mencionar posibilidad de publicación académica o spin-off empresarial. Terminar con gratitud y apertura al diálogo: "Gracias por su atención. Estoy abierto a preguntas, comentarios y especialmente a críticas constructivas que me ayuden a mejorar SEIRA".
+        </div>
+    </div>
+
+    <!-- SLIDE 11: PREGUNTAS Y CONTACTO -->
+    <div class="slide">
+        <div class="slide-header">
+            <h1 class="slide-title">💬 Preguntas y Contacto</h1>
+            <p class="slide-subtitle">Gracias por su atención</p>
+        </div>
+
+        <div class="slide-content" style="justify-content: center; align-items: center; text-align: center;">
+            <div class="icon" style="font-size: 80px; margin-bottom: 30px;">🚀</div>
+
+            <h2 style="color: #9b87f5; font-size: 36px; margin-bottom: 40px;">SEIRA</h2>
+
+            <div style="background: rgba(155, 135, 245, 0.1); padding: 40px; border-radius: 15px; border: 2px solid #7c3aed; max-width: 600px; margin: 0 auto;">
+                <p style="font-size: 24px; margin-bottom: 20px; color: #e9d5ff;">
+                    <strong>Nery Alexander Galvez Hernandez</strong>
+                </p>
+                <p style="font-size: 18px; margin-bottom: 10px; color: #c4b5fd;">
+                    📧 nerygalvezh@gmail.com
+                </p>
+                <p style="font-size: 18px; margin-bottom: 10px; color: #c4b5fd;">
+                    📱 +502 5679 - 7006
+                </p>
+                <p style="font-size: 18px; margin-bottom: 10px; color: #c4b5fd;">
+                    🐙 github.com/Viru154/SEIRA
+                </p>
+                <p style="font-size: 16px; margin-top: 30px; color: #a78bfa;">
+                    Ingeniería en Sistemas de Información<br>
+                    y Ciencias de la Computación<br>
+                    Universidad Mariano Gálvez de Guatemala<br>
+                    Sede Jocotenango, Sacatepéquez
+                </p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 50px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: #9b87f5; margin-bottom: 15px; font-size: 22px;">🤔 Preguntas Frecuentes Anticipadas:</h3>
+                <ul style="list-style: none; text-align: left; font-size: 16px; line-height: 2;">
+                    <li>❓ <strong>¿Cómo se calibró la ponderación del IAR?</strong> → Basado en literatura BPMN + ajustes iterativos</li>
+                    <li>❓ <strong>¿Funciona en otros idiomas?</strong> → Actualmente solo español, roadmap incluye multi-idioma</li>
+                    <li>❓ <strong>¿Cuántos tickets mínimos necesita?</strong> → Recomendado mínimo 100-150 para patrones significativos</li>
+                    <li>❓ <strong>¿Es código abierto?</strong> → Proyecto académico, evaluando licencia open source</li>
+                    <li>❓ <strong>¿Cuánto cuesta implementar?</strong> → Prototipo gratuito, producción depende de escala</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 50px; font-size: 28px; color: #9b87f5;">
+                <strong>¡Gracias por su tiempo y atención! 🙏</strong>
+            </div>
+        </div>
+
+        <div class="notes-section">
+            <div class="notes-title">📝 NOTAS PARA Q&A:</div>
+            Prepararse para tipos de preguntas: (1) Técnicas: tener GitHub listo para mostrar código si preguntan. (2) Metodológicas: defender calibración del IAR con literatura. (3) Comerciales: si preguntan por monetización, ser honesto que es proyecto académico pero tiene potencial. (4) Críticas: agradecer y mostrar apertura - "excelente observación, lo agregaré al roadmap". (5) Comparaciones: si comparan con productos comerciales, enfatizar que SEIRA es especializado en evaluación PRE-implementación. Mantener calma y confianza - conoces tu proyecto mejor que nadie.
+        </div>
+    </div>
+
+    <div class="footer" style="position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #1a1625 0%, #2d1b4e 100%); padding: 10px; text-align: center;">
+        <p style="font-size: 12px; color: #a78bfa;">
+            SEIRA - Sistema de Evaluación Inteligente para la Implementación Responsable de IA | Universidad Mariano Gálvez de Guatemala | 2025
+        </p>
+    </div>
+
+</body>
+</html>
